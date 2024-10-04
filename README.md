@@ -25,35 +25,27 @@
 ## Definição dos Pinos dos Sensores
 
 ```cpp
-#define DHTPIN D4    // Pino conectado ao DHT11
-#define LDRPIN A0    // Pino analógico conectado ao LDR
+#define DHTTYPE DHT11
+#define DHTPIN 4
+DHT dht(DHTPIN, DHTTYPE);
 ```
 
 ## Leitura e Envio dos Dados via MQTT
 ```cpp
-Copiar código
-void loop() {
-  // Leitura dos sensores
-  float temperature = dht.readTemperature();
-  float humidity = dht.readHumidity();
-  int ldrValue = analogRead(LDRPIN);
+void handleLuminosity() {
+    const int potPin = 34;
+    int sensorValue = analogRead(potPin);
+    int luminosity = map(sensorValue, 0, 4095, 0, 100);
+    String mensagem = String(luminosity);
+    Serial.print("Valor da luminosidade: ");
+    Serial.println(mensagem.c_str());
+    MQTT.publish(TOPICO_PUBLISH_2, mensagem.c_str());
+
+    float humidity = dht.readHumidity();
+    float temperature = dht.readTemperature();
   ```
 
-  ```cpp
-  // Montar a mensagem em formato JSON para envio
-  String payload = "{\"temperature\": " + String(temperature) + 
-                   ", \"humidity\": " + String(humidity) + 
-                   ", \"luminosity\": " + String(ldrValue) + 
-                   ", \"timestamp\": \"" + getTimeStamp() + "\"}";
-```
 
-  // Enviar a mensagem para o broker MQTT
-  ```cpp
-  client.publish("vinheria/dados", payload.c_str());
-  
-  delay(5000);  // Aguardar 5 segundos até a próxima leitura
-}
-```
 
 ## Requisitos Técnicos
 <ul> <li><strong>Plataforma FIWARE:</strong> Utilizada como back-end para gerenciamento e armazenamento dos dados.</li> <li><strong>Protocolo MQTT:</strong> Utilizado para transmissão eficiente dos dados dos sensores para o back-end.</li> <li><strong>NGSIv2:</strong> Padrão de interface para integração com serviços e sistemas externos.</li> </ul>
