@@ -6,7 +6,7 @@
 <p>Este projeto visa monitorar as condições de armazenamento de vinhos em uma vinheria, utilizando sensores de temperatura, umidade (DHT11) e luminosidade (LDR). As leituras dos sensores são enviadas via protocolo MQTT para uma plataforma FIWARE de back-end, conforme o padrão NGSIv2. O sistema permite o monitoramento remoto das condições ambientais e histórico dos dados, promovendo o controle eficaz da qualidade dos vinhos.</p>
 
 ## Componentes Utilizados
-<ul> <li><strong>ESP8266</strong> (MCU com Wi-Fi integrado)</li> <li><strong>Sensor de Temperatura e Umidade DHT11</strong></li> <li><strong>Sensor de Luminosidade LDR</strong></li> <li><strong>Resistores</strong></li> <li><strong>Jumpers e Protoboard</strong></li> </ul>
+<ul> <li><strong>ESP32</strong> (MCU com Wi-Fi integrado)</li> <li><strong>Sensor de Temperatura e Umidade DHT11</strong></li> <li><strong>Sensor de Luminosidade LDR</strong></li> <li><strong>Resistores</strong></li> <li><strong>Jumpers e Protoboard</strong></li> </ul>
 
 ## Funcionamento do Sistema
 <p>O sistema lê continuamente os dados de temperatura, umidade e luminosidade do ambiente onde os vinhos são armazenados. As informações são transmitidas para a plataforma FIWARE usando MQTT, juntamente com um <code>time stamp</code> de cada leitura. A interface FIWARE segue o padrão NGSIv2, possibilitando integração com o ecossistema europeu de negócios e o armazenamento histórico dos dados para análise.</p>
